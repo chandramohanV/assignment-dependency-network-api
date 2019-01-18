@@ -27,27 +27,30 @@ Eg. a 777 requires different tasks to be completed during the turnaround than a 
 
 The **Dependency Network API** is a web API that allows dependency networks to be stored, accessed, and changed.
 This happens quite often, as process designers are constantly trying to optimize the turnaround - and by extension all of its tasks.
+The end-users of the **Dependency Network API** are developers building a web application (e.g. in Angular) for these process designers.
 
 ## Functional Requirements
 
 The **Dependency Network API** has the following _functional requirements_:
 
-- It stores tasks with their dependencies on other tasks
-- The dependency network can be retrieved as a whole
-- Given a task, you can retrieve all other tasks it depends on (ie. _upstream tasks_)
-- Given a task, you can retrieve all other tasks that are dependent on it (ie. _downstream tasks_)
-- You can add a new task, including dependencies with other tasks
-- You can create new dependencies between existing tasks
-- You can delete tasks
-- You can remove dependencies between tasks
-- The dependency network (or parts of it) should be viewable/retrievable by anyone
-- Only a select few should be able to change the dependency network (eg. add tasks or dependencies, change tasks/dependencies, remove tasks/dependencies), so some form of user/API authentication/authorization is required
-- All of the above is accessible through an API
+- It stores tasks with their dependencies on other tasks. **For this assignment, it is not required to store these in a database.
+  It is sufficient to keep them in memory**.
+- The dependency network can be retrieved as a whole.
+- Given a task, you can retrieve all other tasks it depends on (ie. _upstream tasks_).
+- Given a task, you can retrieve all other tasks that are dependent on it (ie. _downstream tasks_).
+- You can add a new task, including dependencies with other tasks.
+- You can create new dependencies between existing tasks.
+- You can delete tasks.
+- You can remove dependencies between tasks.
+- The dependency network (or parts of it) should be viewable/retrievable by anyone.
+- Only a select few should be able to change the dependency network (eg. add tasks or dependencies, change tasks/dependencies, remove tasks/dependencies),
+  so some form of user/API authentication/authorization is required
 
-#### Bonus objectives
+## Bonus objectives
 
 The following are not necessarily needed to make an impression with your product, but can be seen as cool challenges for yourself:
 
+- Write unit tests for your code.
 - Make it possible to define multiple dependency networks, per aircraft type (eg. Boeing 777, Boeing 737, Airbus A380)
 
 ## Non-functional Requirements
@@ -67,7 +70,7 @@ This assignment should be delivered in the following way:
 
 Here are some tips to get you going:
 
-- Think of what you're building as a real **Product**. Think of your end-users and what they want. In the case of a service with an API but no GUI, your end-users are developers, so provide them with an awesome developer-experience.
+- Think of what you're building as a real **Product**. Think of your end-users and what they want. In this case your end-users are developers, so provide them with an awesome developer-experience.
 - Choose a suitable datastructure for modeling the dependency network
 - Make a concious decision on what API architecture you use. There are many flavours, so choose what you think best: REST API (can be JSON or XML for example), SOAP, gRPC, ...
 - Design your API in an intuitive way, design it according to the best practices of the API technology you choose
