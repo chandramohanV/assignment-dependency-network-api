@@ -59,6 +59,7 @@ The following are not required, but can be seen as nice-to-have's:
 
 - Write unit tests for your code.
 - Make it possible to define **multiple** dependency networks: one per aircraft type (eg. Boeing 777, Boeing 737, Airbus A380).
+- Store the dependency networks in a database.
 
 ## Deliverables
 
