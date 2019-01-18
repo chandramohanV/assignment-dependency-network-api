@@ -44,19 +44,21 @@ The **Dependency Network API** has the following _functional requirements_:
 - You can remove dependencies between tasks.
 - The dependency network (or parts of it) should be viewable/retrievable by anyone.
 - Only a select few should be able to change the dependency network (eg. add tasks or dependencies, change tasks/dependencies, remove tasks/dependencies),
-  so some form of user/API authentication/authorization is required
-
-## Bonus objectives
-
-The following are not necessarily needed to make an impression with your product, but can be seen as cool challenges for yourself:
-
-- Write unit tests for your code.
-- Make it possible to define multiple dependency networks, per aircraft type (eg. Boeing 777, Boeing 737, Airbus A380)
+  so some form of user/API authentication/authorization is required.
 
 ## Non-functional Requirements
 
 - The **Dependency Network API** is built using **Python**.
+- Maintainability is favoured over performance. No complex performance optimizations should be needed. 
+  Another developer should be able to continue where you left off.
 - It should be possible to run the **Dependency Network API** (and all of its components) on a laptop
+
+## Bonus objectives
+
+The following are not required, but can be seen as nice-to-have's:
+
+- Write unit tests for your code.
+- Make it possible to define **multiple** dependency networks: one per aircraft type (eg. Boeing 777, Boeing 737, Airbus A380).
 
 ## Deliverables
 
@@ -66,12 +68,10 @@ This assignment should be delivered in the following way:
 - Documentation is provided in the [README.md](README.md) on how the API works, and **how to run it**.
 - Any information, (dummy)-data, files, and other assets that are needed to run this API, are provided in this repository.
 
-## Tips
-
-Here are some tips to get you going:
+## Tips and remarks
 
 - Think of what you're building as a real **Product**. Think of your end-users and what they want. In this case your end-users are developers, so provide them with an awesome developer-experience.
-- Choose a suitable datastructure for modeling the dependency network
+- Choose a suitable data structure for modeling the dependency network
 - Make a concious decision on what API architecture you use. There are many flavours, so choose what you think best: REST API (can be JSON or XML for example), SOAP, gRPC, ...
 - Design your API in an intuitive way, design it according to the best practices of the API technology you choose
 - There are many existing libraries/packages that can solved common problems for you.
