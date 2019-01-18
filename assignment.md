@@ -27,7 +27,12 @@ Eg. a 777 requires different tasks to be completed during the turnaround than a 
 
 The **Dependency Network API** is a web API that allows dependency networks to be stored, accessed, and changed.
 This happens quite often, as process designers are constantly trying to optimize the turnaround - and by extension all of its tasks.
-The end-users of the **Dependency Network API** are developers building a web application (e.g. in Angular) for these process designers.
+
+The end-users of the **Dependency Network API** are:
+
+- developers building a web application (e.g. in Angular) for these process designers.
+- developers building optimization tools that need the dependency network as input
+  (these only need to retrieve the dependency network, not make changes)
 
 ## Functional Requirements
 
@@ -49,7 +54,7 @@ The **Dependency Network API** has the following _functional requirements_:
 ## Non-functional Requirements
 
 - The **Dependency Network API** is built using **Python**.
-- Maintainability is favoured over performance. No complex performance optimizations should be needed. 
+- Maintainability is favoured over performance. No complex performance optimizations should be needed.
   Another developer should be able to continue where you left off.
 - It should be possible to run the **Dependency Network API** (and all of its components) on a laptop
 
