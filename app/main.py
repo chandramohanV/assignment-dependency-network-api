@@ -1,8 +1,11 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from app.model import Task
+from app.model.Task_Model import *
 from flask_security.decorators import roles_required
+from flask.logging import default_handler
 import os
+import logging
+
 
 """Controller which handles all the incoming REST request"""
 app = Flask(__name__)
@@ -29,9 +32,10 @@ def add_task():
         db.session.add(new_task)
         db.session.commit()
     except Exception as error:
-        app.log.error("database connection error: " + error)
+        print(error)
+        # app.log.error("database connection error: " + error)
 
-    return Task.task_schema.jsonify(new_task)
+    return jsonify(new_task)
 
 
 # endpoint to show all task form the database.sqlite
@@ -39,37 +43,40 @@ def add_task():
 @app.route("/api/task", methods=["GET"])
 def get_task():
     try:
-        all_task = Task.app.query.all()
-        result = Task.task_schema.dump(all_task)
+        all_task = Task.query.all()
+        result = task_schema.dump(all_task)
     except Exception as error:
-        app.log.error("database connection error: " + error)
+        print(error)
+        # app.log.error("database connection error: " + error)
     return jsonify(result.data)
 
 
 # endpoint to update task
 @roles_required('admin')
-@app.route("/api/task/<name>", methods=["PUT"])
+@app.route("/api/task", methods=["PUT"])
 def task_update(name):
     name = request.json['taskname']
     try:
-        task = Task.app.query.get(name)
+        task = Task.query.get(name)
         db.session.commit()
     except Exception as error:
-        app.log.error("database connection error: " + error)
-    return Task.task_schema.jsonify(task)
+        print(error)
+        # app.log.error("database connection error: " + error)
+    return jsonify(task)
 
 
 # endpoint to delete task
 @roles_required('admin')
 @app.route("/api/task/<name>", methods=["DELETE"])
 def task_delete(name):
-    task = Task.app.query.get(name)
+    task = Task.query.get(name)
     try:
         db.session.delete(task)
         db.session.commit()
     except Exception as error:
-        app.log.error("database connection error: " + error)
-    return Task.task_schema.jsonify(task)
+        print(error)
+        # app.log.error("database connection error: " + error)
+    return jsonify(task)
 
 
 if __name__ == '__main__':

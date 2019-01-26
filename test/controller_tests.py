@@ -1,4 +1,4 @@
-from app import controller
+from app import main
 import unittest
 
 class controller_test(unittest.TestCase):
@@ -13,7 +13,7 @@ class controller_test(unittest.TestCase):
 
     def setUp(self):
         # creates a test client
-        self.app = controller.app.test_client()
+        self.app = main.app.test_client()
         # propagate the exceptions to the test client
         self.app.testing = True
 

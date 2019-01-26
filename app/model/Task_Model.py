@@ -1,11 +1,10 @@
-from flask_sqlalchemy import SQLAlchemy
-from app import controller
+from app.main import *
 from flask_marshmallow import Marshmallow
 from flask import Flask
 
 app = Flask(__name__)
-db = SQLAlchemy(controller.app)
-ma = Marshmallow(controller.app)
+db = SQLAlchemy(app)
+ma = Marshmallow(app)
 
 
 class Task(db.Model):
