@@ -1,4 +1,4 @@
-from app.main import *
+from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask import Flask
 
@@ -22,8 +22,9 @@ class TaskSchema(ma.Schema):
         fields = ('taskName',)
 
 
-task_schema = TaskSchema()
-task_schema = TaskSchema(many=True)
+class Schema_object:
+    stask_schema = TaskSchema()
+    task_schema = TaskSchema(many=True)
 
 if __name__ == '__main__':
     app.run(debug=True)

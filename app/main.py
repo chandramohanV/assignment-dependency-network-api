@@ -1,19 +1,19 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from app.model.Task_Model import *
+from app import Task, Schema_object
 from flask_security.decorators import roles_required
-from flask.logging import default_handler
 import os
+from flask_swagger import swagger
 import logging
 
 
 """Controller which handles all the incoming REST request"""
+logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
 # Database using Alchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'database.sqlite')
 db = SQLAlchemy(app)
-
 
 # endpoint for health check
 @roles_required('dev', 'admin')
@@ -21,6 +21,12 @@ db = SQLAlchemy(app)
 def heartbeat():
     return "Alive"
 
+@app.route("/api/spec")
+def spec():
+    swag = swagger(app)
+    swag['info']['version'] = "1.0"
+    swag['info']['title'] = "Network API"
+    return jsonify(swag)
 
 # endpoint to create new Task
 @roles_required('admin')
@@ -33,7 +39,7 @@ def add_task():
         db.session.commit()
     except Exception as error:
         print(error)
-        # app.log.error("database connection error: " + error)
+        logging.error("database connection error: " + error)
 
     return jsonify(new_task)
 
@@ -44,10 +50,11 @@ def add_task():
 def get_task():
     try:
         all_task = Task.query.all()
-        result = task_schema.dump(all_task)
+        result = Schema_object.task_schema(all_task)
     except Exception as error:
         print(error)
-        # app.log.error("database connection error: " + error)
+        logging.error("database connection error: " + error)
+
     return jsonify(result.data)
 
 
@@ -62,6 +69,7 @@ def task_update(name):
     except Exception as error:
         print(error)
         # app.log.error("database connection error: " + error)
+
     return jsonify(task)
 
 
@@ -76,6 +84,7 @@ def task_delete(name):
     except Exception as error:
         print(error)
         # app.log.error("database connection error: " + error)
+
     return jsonify(task)
 
 
